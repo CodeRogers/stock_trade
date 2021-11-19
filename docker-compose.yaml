@@ -5,8 +5,8 @@ services:
     image: mysql:latest
     ports:
       - 3306:3306
-    volumes:
-      - database:/var/lib/mysql
+#    volumes:
+#      - database:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=domingo15
       - MYSQL_DATABASE=lucid
@@ -18,5 +18,5 @@ services:
       - 80:80
     environment:
       - PMA_ARBITRARY=1
-volumes:
-  database:
+#volumes:
+#  database:
