@@ -26,3 +26,4 @@ Route.get('/', async () => {
 
 Route.resource('users', 'UsersController').apiOnly()
 Route.resource('stocks', 'StocksController').apiOnly()
+Route.put('/users/:id/stocks', 'UserStocksController.addStocks')
