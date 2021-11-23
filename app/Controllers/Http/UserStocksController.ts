@@ -3,8 +3,12 @@ import User from 'App/Models/User'
 
 export default class UserStocksController {
   public async addStocks({ request, params }: HttpContextContract) {
-    const idsStock = request.input('ids_stock')
+    const stocks = request.input('stocks')
     const user = await User.findOrFail(params.id)
-    await user.related('stocks').attach(idsStock)
+    const objectFormatter = {}
+    stocks.forEach((stock) => {
+      objectFormatter[Number(stock.id)] = { quantity: stock.quantity }
+    })
+    await user.related('stocks').attach(objectFormatter)
   }
 }

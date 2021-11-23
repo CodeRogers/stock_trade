@@ -4,7 +4,12 @@ import { UserStoreValidator, UserUpdateValidator } from 'App/Validators/User'
 
 export default class UsersController {
   public async index({}: HttpContextContract) {
-    return await User.query().preload('stocks')
+    const users = await User.query().preload('stocks', (query) => {
+      return query.pivotColumns(['quantity'])
+    })
+    users[0].$extras
+
+    return users
   }
 
   public async store({ request }: HttpContextContract) {

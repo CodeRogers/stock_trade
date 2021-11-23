@@ -3,6 +3,11 @@ import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm
 import User from './User'
 
 export default class Stock extends BaseModel {
+  public serializeExtras() {
+    return {
+      quantity: this.$extras.pivot_quantity,
+    }
+  }
   @column({ isPrimary: true })
   public id: number
 
