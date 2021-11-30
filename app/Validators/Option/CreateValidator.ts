@@ -5,8 +5,10 @@ export default class CreateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    name: schema.string({ trim: true }),
-    price: schema.number([rules.unsigned()]),
+    crypto_symbol: schema.string({}, [rules.maxLength(4)]),
+    amout: schema.number([rules.unsigned()]),
+    multiplicator: schema.number([rules.unsigned()]),
+    expiration: schema.enum(['5m', '15m', '1h', '1d'] as const),
   })
 
   public messages = {}

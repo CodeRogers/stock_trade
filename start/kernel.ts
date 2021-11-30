@@ -22,7 +22,11 @@ import Server from '@ioc:Adonis/Core/Server'
 */
 Server.middleware.register([
   () => import('@ioc:Adonis/Core/BodyParser'),
+<<<<<<< Updated upstream
   //   () => import('App/Middleware/LogsPino'),
+=======
+  () => import('App/Middleware/LogsPino'),
+>>>>>>> Stashed changes
 ])
 
 /*

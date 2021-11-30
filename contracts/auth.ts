@@ -8,6 +8,7 @@
 import User from 'App/Models/User'
 
 declare module '@ioc:Adonis/Addons/Auth' {
+<<<<<<< Updated upstream
   /*
   |--------------------------------------------------------------------------
   | Providers
@@ -33,12 +34,16 @@ declare module '@ioc:Adonis/Addons/Auth' {
     | different Lucid models.
     |
     */
+=======
+  interface ProvidersList {
+>>>>>>> Stashed changes
     user: {
       implementation: LucidProviderContract<typeof User>
       config: LucidProviderConfig<typeof User>
     }
   }
 
+<<<<<<< Updated upstream
   /*
   |--------------------------------------------------------------------------
   | Guards
@@ -67,6 +72,12 @@ declare module '@ioc:Adonis/Addons/Auth' {
     api: {
       implementation: OATGuardContract<'user', 'api'>
       config: OATGuardConfig<'user'>
+=======
+  interface GuardsList {
+    web: {
+      implementation: SessionGuardContract<'user', 'web'>
+      config: SessionGuardConfig<'user'>
+>>>>>>> Stashed changes
     }
   }
 }

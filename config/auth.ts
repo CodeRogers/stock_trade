@@ -17,6 +17,7 @@ import { AuthConfig } from '@ioc:Adonis/Addons/Auth'
 |
 */
 const authConfig: AuthConfig = {
+<<<<<<< Updated upstream
   guard: 'api',
   guards: {
     /*
@@ -100,6 +101,18 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
+=======
+  guard: 'web',
+
+  guards: {
+    web: {
+      driver: 'session',
+
+      provider: {
+        driver: 'lucid',
+        identifierKey: 'id',
+        uids: ['email'],
+>>>>>>> Stashed changes
         model: () => import('App/Models/User'),
       },
     },
