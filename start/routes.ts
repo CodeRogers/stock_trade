@@ -24,6 +24,14 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.resource('users', 'UsersController').apiOnly()
-Route.resource('stocks', 'StocksController').apiOnly()
-Route.put('/users/:id/stocks', 'UserStocksController.addStocks')
+Route.group(() => {
+  Route.resource('users', 'UsersController').apiOnly()
+  Route.resource('stocks', 'StocksController').apiOnly()
+  Route.put('/users/:id/stocks', 'UserStocksController.addStocks')
+  Route.post('/users/pdf', 'UsersController.storeCPF')
+  Route.get('documents/download/:id', 'DocumentsController.showDownload')
+  Route.resource('documents', 'DocumentsController').apiOnly()
+  Route.get('logout', 'LogoutController.index')
+}).middleware(['auth'])
+
+Route.post('login', 'LoginController.store')
