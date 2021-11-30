@@ -42,7 +42,7 @@ const driveConfig: DriveConfig = {
     */
     local: {
       driver: 'local',
-      visibility: 'public',
+      visibility: 'private',
 
       /*
       |--------------------------------------------------------------------------

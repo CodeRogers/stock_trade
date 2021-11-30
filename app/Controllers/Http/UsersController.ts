@@ -4,11 +4,11 @@ import { UserStoreValidator, UserUpdateValidator } from 'App/Validators/User'
 
 export default class UsersController {
   public async index({}: HttpContextContract) {
-    const users = await User.query().preload('stocks', (query) => {
-      return query.pivotColumns(['quantity'])
-    })
-    users[0].$extras
-
+    const users = await User.query()
+      .preload('stocks', (query) => {
+        return query.pivotColumns(['quantity'])
+      })
+      .preload('documentos')
     return users
   }
 
@@ -18,7 +18,8 @@ export default class UsersController {
   }
 
   public async show({ params }: HttpContextContract) {
-    return await User.findOrFail(params.id)
+    const user = await User.findOrFail(params.id)
+    return user
   }
 
   public async update({ params, request }: HttpContextContract) {

@@ -9,6 +9,7 @@ export default class Users extends BaseSchema {
       table.string('name', 255).notNullable()
       table.string('email', 255).notNullable()
       table.enum('profile', ['admin', 'user']).notNullable().defaultTo('user')
+      table.string('password', 180).notNullable()
 
       table.timestamps(true, true)
     })
