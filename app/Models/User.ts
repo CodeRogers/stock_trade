@@ -1,21 +1,20 @@
 import { DateTime } from 'luxon'
 import {
   BaseModel,
-  beforeSave,
   column,
+  beforeSave,
   HasMany,
   hasMany,
   ManyToMany,
   manyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
-import Stock from './Stock'
-import Document from './Document'
+import Option from './Option'
+import UserDoc from './UserDoc'
 import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
   public id: number
-
   @column()
   public name: string
 
@@ -28,6 +27,12 @@ export default class User extends BaseModel {
   @column({ serializeAs: null })
   public password: string
 
+  @beforeSave()
+  public static async hashPassword(cliente: User) {
+    if (cliente.$dirty.password) {
+      cliente.password = await Hash.make(cliente.password)
+    }
+  }
   @column()
   public rememberMeToken?: string
 
@@ -37,23 +42,19 @@ export default class User extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Document)
-  public documentos: HasMany<typeof Document>
-
-  @beforeSave()
-  public static async hashPassword(auth: User) {
-    if (auth.$dirty.password) {
-      auth.password = await Hash.make(auth.password)
-    }
-  }
-
-  @manyToMany(() => Stock, {
+  @manyToMany(() => Option, {
     localKey: 'id',
     pivotForeignKey: 'user_id',
     relatedKey: 'id',
-    pivotRelatedForeignKey: 'stock_id',
-    pivotTable: 'user_has_stocks',
-    pivotColumns: ['quantity'],
+    pivotRelatedForeignKey: 'option_id',
+    pivotTable: 'user_has_options',
+    pivotColumns: ['result'],
+    pivotTimestamps: true,
   })
-  public stocks: ManyToMany<typeof Stock>
+  public options: ManyToMany<typeof Option>
+
+  @hasMany(() => UserDoc, {
+    foreignKey: 'userId',
+  })
+  public docs: HasMany<typeof UserDoc>
 }

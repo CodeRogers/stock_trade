@@ -20,6 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+<<<<<<< Updated upstream
 Route.get('/', async () => {
   return { hello: 'world' }
 })
@@ -35,3 +36,16 @@ Route.group(() => {
 }).middleware(['auth'])
 
 Route.post('login', 'LoginController.store')
+=======
+Route.resource('users', 'UsersController').apiOnly()
+Route.resource('options', 'StocksController').apiOnly()
+Route.put('users/:id/stocks', 'UserStocksController.addStocks')
+
+// Routes for Docs
+Route.post('docs/user/:id', 'UserDocsController.store')
+Route.delete('docs/user/:id', 'UserDocsController.destroy')
+Route.get('docs/user/:id', 'UserDocsController.show')
+
+//autentication routes
+Route.post('user/login', 'UsersController.login')
+>>>>>>> Stashed changes

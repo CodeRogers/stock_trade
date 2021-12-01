@@ -3,13 +3,29 @@ import User from 'App/Models/User'
 import { UserStoreValidator, UserUpdateValidator } from 'App/Validators/User'
 
 export default class UsersController {
+  public async login({ auth, request }: HttpContextContract) {
+    const email = request.input('email')
+    const password = request.input('senha')
+
+    return await auth
+      .use('web')
+      .attempt(email, password)
+      .then((data) => {
+        let moreData = { msg: 'foi meu quiridu' }
+        return { data, ...moreData }
+      })
+  }
   public async index({}: HttpContextContract) {
+<<<<<<< Updated upstream
     const users = await User.query()
       .preload('stocks', (query) => {
         return query.pivotColumns(['quantity'])
       })
       .preload('documentos')
     return users
+=======
+    return await User.query().preload('stocks').preload('docs')
+>>>>>>> Stashed changes
   }
 
   public async store({ request }: HttpContextContract) {

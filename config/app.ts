@@ -169,7 +169,7 @@ export const logger: LoggerConfig = {
   | at deployment level and not code level.
   |
   */
-  level: Env.get('LOG_LEVEL', 'info'),
+  level: Env.get('LOG_LEVEL', 'trace'),
 
   /*
   |--------------------------------------------------------------------------
@@ -181,7 +181,11 @@ export const logger: LoggerConfig = {
   |
   */
   prettyPrint: false,
+<<<<<<< Updated upstream
   stream: './logs.log',
+=======
+  stream: './logs.json',
+>>>>>>> Stashed changes
 }
 
 /*

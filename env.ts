@@ -34,6 +34,9 @@ export default Env.rules({
   SMTP_PORT: Env.schema.number(),
   SMTP_USERNAME: Env.schema.string(),
   SMTP_PASSWORD: Env.schema.string(),
+<<<<<<< Updated upstream
 
   SESSION_DRIVER: Env.schema.string(),
+=======
+>>>>>>> Stashed changes
 })

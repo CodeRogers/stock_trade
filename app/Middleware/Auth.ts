@@ -53,14 +53,22 @@ export default class AuthMiddleware {
       'Unauthorized access',
       'E_UNAUTHORIZED_ACCESS',
       guardLastAttempted,
+<<<<<<< Updated upstream
       this.redirectTo
+=======
+      this.redirectTo,
+>>>>>>> Stashed changes
     )
   }
 
   /**
    * Handle request
    */
+<<<<<<< Updated upstream
   public async handle(
+=======
+  public async handle (
+>>>>>>> Stashed changes
     { auth }: HttpContextContract,
     next: () => Promise<void>,
     customGuards: (keyof GuardsList)[]
